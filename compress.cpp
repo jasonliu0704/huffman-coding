@@ -37,10 +37,13 @@ int main(int argc, char** argv){
   //read bytes from the file and frequence count
   BitInputStream BIS(iStream);
   vector<int> freq(256, 0);
+  int non0 = 0;
   while(1){
     int ch = iStream.get();
     if(iStream.eof())break;
     freq.at(ch)++;
+    if(freq.at(ch) == 1)non0++;
+    cout << non0 << endl;
   }
   iStream.close();
 
@@ -57,10 +60,11 @@ int main(int argc, char** argv){
     return -1;
   }
 
-  //write header to the output file
+  //write header and non0 count to the output file
   BitOutputStream BOS(oStream);
+  BOS.writeInt(non0);
   for(auto i : freq){
-    BOS.writeInt(i);
+    if(i != 0)BOS.writeInt(i);
   }
 
   //encode and write

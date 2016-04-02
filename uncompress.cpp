@@ -40,8 +40,10 @@ int main(int argc, char** argv){
   vector<int> freq(256,0);
   int total = 0;
   int count;
+  int non0 = BIS.readInt();
+  cout << non0 << endl;
 
-  for(int i = 0; i < freq.size(); i++){
+  for(int i = 0; i < non0; i++){
     count = BIS.readInt();
     //cout << count << endl;
     total += count;
